@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+          function Record(text,date){
+            this.text=text;
+            this.date=date;
+            this.time = function(){
+              return ""+date.toLocaleTimeString();
+            }
+            this.day = function(){
+              return ""+date.toLocaleDateString();
+            }
+          }
+         var records=[
+			new Record("Добро пожаловать на форум!",
+					new Date(2020,9,30,09,00,00)),
+				new Record("Здесь можно делиться Вашими идеями и просить помощи у других",
+					new Date(2020,9,30,12,00,00)),
+			];
+          function displayRecords(){
+            var text = "";
+            var odd = true;
+            for(var i in records){
+              if(odd){
+                text += "<p style='background-color:gray'>";
+              }else{
+                text += "<p style='background-color:lightgray'>";
+              }
+              odd = !odd;
+              text += records[i].time() + " ";
+              text +="<strong>"+ records[i].day() + "</strong><br>";
+              text += records[i].text+"</p>";
+            }
+            document.getElementById("records_place").innerHTML = text;
+          }
+          function send(){
+            var r = new Record(
+              document.getElementById("newtext").value,
+              new Date());
+              records.push(r);
+              displayRecords();
+          }
+        
+			var times=[
+new Record("1",
+new Date (2013, 10, 19, 06, 00, 0, 0 )),
+new Record("2",
+new Date ( 2021, 10, 30, 10, 00, 0, 0)),
+];
+
+
+
+function morning() {
+var l = records.length;
+var morningArray = "";
+for (var i=0; i<l ; i++ ){
+if((records[i].time() >= times[0].time() ) && (records[i].time() <= times[1].time())) {
+morningArray += (records[i].text + " (" + records[i].time() + " " + records[i].day() + " )" + "\n");
+}
+};
+alert(morningArray);
+}
+
+          function sort(compare){
+            var l=records.length;
+            for(var i=0;i<l-1; i++){
+              var j_min = i;
+              for(var j=i+1; j<l; j++){
+                if(compare(records[j],records[j_min])){
+                  j_min=j;
+                }
+              }
+
+              var r=records[j_min];
+              records[j_min] = records[i];
+              records[i] = r;
+            }
+            displayRecords();
+          }
+          var compares = [
+            function comp1(r1,r2) {
+              return r1.date < r2.date;
+            },
+            function comp2(r1,r2) {
+              return r1.date > r2.date;
+            },
+            function comp3(r1,r2) {
+              return r1.text < r2.text;
+            },
+            function comp4(r1,r2) {
+              return r1.text > r2.text;
+            }
+          ];
+function find() {//Ввод полной фразы
+var l = records.length;
+var tx = document.getElementById("newtext").value
+
+for (var i=0; i<l ; i++ ){
+if (tx == records[i].text) {
+alert (records[i].text + " ( " + records[i].time() + " " + records[i].day() + " )");
+}};
+}
+     
+		  
+        </script>
+    </head> 
+    <body onload="displayRecords()">
+      <div id="toolbar">
+        <input type="text" id = "newtext"/>
+        <input type="button" value="Добавить запись" onclick="send()"/>
+        <input type="button" value="Найти" onclick="find()"/>
+        <input type="button" value="Утренние" onclick="morning()"/>
+        <input type="button" value="По возрастающей дате " onclick="sort(compares[0])"/>
+        <input type="button" value="По убывающей дате  " onclick="sort(compares[1])"/>
+        <input type="button" value="По алфавиту вверх" onclick="sort(compares[2])"/>
+        <input type="button" value="По алфавиту вниз" onclick="sort(compares[3])"/>
+      </div>
+      <div id ="records_place">
+      </div>
+      
+    </body>
+</html> 

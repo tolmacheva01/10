@@ -1,0 +1,47 @@
+<html>
+<head>
+<meta charset="utf-8">
+        <script>
+          function draw(){
+              var canvas = document.getElementById('canvas');
+              var ctx = canvas.getContext('2d');
+              var r = 200;
+              var x = 500;
+              while(r>0){
+              var colorR = Math.floor(255*Math.random());
+              var colorG = Math.floor(255*Math.random());
+              var colorB = Math.floor(255*Math.random());
+            ctx.beginPath();
+            ctx.moveTo(400,200);
+            ctx.arc(x,300,r,0,Math.PI*2,true);
+            ctx.fillStyle = 'rgb('+colorR+','+colorG+','+colorB+')';
+            ctx.fill();
+            r=r-10;
+            x=x+10;
+			}}
+             function drawUp(){
+              var canvas = document.getElementById('canvas');
+              var ctx = canvas.getContext('2d');
+              var l = 200;
+              var j = 900;
+              while(l>0){
+              var colorR = Math.floor(255*Math.random());
+              var colorG = Math.floor(255*Math.random());
+              var colorB = Math.floor(255*Math.random());
+            ctx.beginPath();
+            ctx.moveTo(j,700);
+            ctx.arc(700,700,l,0,Math.PI*2,true);
+			ctx.fillStyle = 'rgb('+colorR+','+colorG+','+colorB+')';
+            ctx.lineWidth = 3;
+			ctx.fill();
+            l=l-15;
+            j=j-15;
+            }
+          }
+
+        </script>
+    </head> 
+    <body onload = "draw(); drawUp()">
+        <canvas id="canvas" width="1000" height="2000"></canvas>
+    </body>
+</html> 

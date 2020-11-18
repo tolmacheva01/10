@@ -1,0 +1,126 @@
+<html>
+<head>
+<script type="text/javascript">
+function checkName (field) {
+label=document.getElementById(field.id+"mes");
+if (isEmpty(field)) {
+label.innerHTML="Поле не заполнено!";
+} else if (isLonger20(field)) {
+label.innerHTML="Введено более 20 символов!";
+} else if (containsDigits(field)) {
+label.innerHTML="Введены цифры!";
+} else {
+label.innerHTML="";
+}
+}
+function isEmpty(field) {
+return field.value.length==0;
+}
+function isLonger20(field) {
+return field.value.length>20;
+}
+function containsDigits(field) {
+var digits="0123456789";
+for (var i=0; i<digits.length; i++) {
+if(field.value.indexOf(digits[i]) !=-1) {
+return true;
+}
+}
+return false;
+}
+function checkZip(field) {
+label=document.getElementById(field.id+"mes");
+if(isEmpty(field)){
+label.innerHTML="Поле не запоненно!";
+} else if (!isLenght6(field)){
+label.innerHTML="Длина не равна 6!";
+} else if (containsNotDigits(field)){
+label.innerHTML="Введены не цифры!";
+} else {
+label.innerHTML="";
+}
+function isLenght6(field) {
+return field.value.length==6;
+}
+}
+function containsNotDigits(field) {
+var digits="1234567890";
+for (var i=0; i<field.value.length; i++) {
+if (digits.indexOf(field.value[i])==-1) {
+return true;
+}
+}
+return false;
+}
+function checkEmail(field) {
+label=document.getElementById(field.id+"mes");
+if(isEmpty(field)){
+label.innerHTML="Поле не запоненно!";
+} else if (!isCorrectEmail(field)){
+label.innerHTML="Некорректно введен e-mail!";
+} else {
+label.innerHTML="";
+}
+function isCorrectEmail(field) {
+var emailReges=/^\w+@\w+\.\w{2,4}$/;
+return emailReges.test(field.value);
+}
+}
+function checkPhone(field) {
+label=document.getElementById(field.id+"mes");
+if(isEmpty(field)){
+label.innerHTML="Поле не запоненно!";
+} else if (!isCorrectPhone(field)){
+label.innerHTML="Некорректно введен телефон!";
+} else {
+label.innerHTML="";
+}
+function isCorrectPhone(field) {
+var emailReges=/^8-\d{3}-\d{3}-\d{2}-\d{2}$/;
+return emailReges.test(field.value);
+}
+}
+function checkDate(field) {
+label=document.getElementById(field.id+"mes");
+if(isEmpty(field)){
+label.innerHTML="Поле не запоненно!";
+} else if (!isCorrectDate(field)){
+label.innerHTML="Некорректно введена дата!";
+} else if (!isCorrectDateValues(field)){
+label.innerHTML="Некорректные значения даты!";
+} else {
+label.innerHTML="";
+}
+function isCorrectDate(field) {
+var dataReges=/^\d{2}(\/|\.)\d{2}(\/|\.)\d{4}$/;
+return dataReges.test(field.value);
+}
+function isCorrectDateValues(field) {
+var dd=parseInt(field.value.substring(0,2));
+var mm=parseInt(field.value.substring(3,5));
+return 1<=dd && dd<=31 && 1<=mm && mm<=12;
+}
+}
+</script>
+</head>
+<body>
+Имя: <input type="text" id="firstname" onkeyup="checkName(this)" 
+ onblur="checkName(this)"/>
+<span id="firstnamemes"> </span><br>
+Фамилия: <input type="text" id="name" onkeyup="checkName(this)" 
+ onblur="checkName(this)"/>
+<span id="namemes"> </span><br>
+Почтовый индекс: <input type="text" id="index" onkeyup="checkZip(this)" 
+ onblur="checkZip(this)"/>
+<span id="indexmes"> </span><br>
+Электронный адрес: <input type="text" id="mail" onkeyup="checkEmail(this)" 
+ onblur="checkEmail(this)"/>
+<span id="mailmes"> </span><br>
+Телефон: <input type="text" id="phone" onkeyup="checkPhone(this)" 
+ onblur="checkPhone(this)"/>
+<span id="phonemes"> </span><br>
+ Дата рождения: <input type="text" id="data" onkeyup="checkDate(this)" 
+ onblur="checkDate(this)"/>
+<span id="datames"> </span>
+</body>
+</html>
